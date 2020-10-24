@@ -10,7 +10,7 @@ class TodoSpec extends GebReportingSpec {
     def "Visit page"() {
         given:
         to TodoPage
-
+        report 'Page visited'
         expect:
         at TodoPage
     }
@@ -21,6 +21,7 @@ class TodoSpec extends GebReportingSpec {
 
         when:
         addTaskForm.addTask('New Task')
+        report 'Add item'
 
         then:
         assert taskList.listElements.size() == 1
@@ -31,12 +32,14 @@ class TodoSpec extends GebReportingSpec {
         given:
         to TodoPage
         addTasks(['Task 1', 'Task 2', 'Task 3', 'Task 4'])
-
+        report 'Add elements'
+        
         expect:
         assert taskList.listElements.size() == 4
 
         when:
         taskList.removeElement(2)
+        report 'remove Elements'
 
         then:
         assert taskList.listElements.size() == 3
